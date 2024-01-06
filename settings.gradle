@@ -1,0 +1,4 @@
+rootProject.name = 'MessageOverHead-Update'
+include 'core'
+include 'spigot'
+
