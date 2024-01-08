@@ -17,7 +17,6 @@ public class VisiblePlayerMessagesImpl implements VisiblePlayerMessage.Editable,
     protected Editable[] messages;
     protected Collection<Player> showers;
     protected Location location;
-    protected double sizeBetweenLines;
 
 
     @Override
@@ -28,6 +27,25 @@ public class VisiblePlayerMessagesImpl implements VisiblePlayerMessage.Editable,
     @Override
     public Collection<Player> getShowers() {
         return Collections.unmodifiableCollection(showers);
+    }
+
+    @Override
+    public void show() {
+        for (Editable message : messages) {
+            message.show();
+        }
+    }
+
+    @Override
+    public void hide() {
+        for (Editable message : messages) {
+            message.hide();
+        }
+    }
+
+    @Override
+    public boolean isShow() {
+        return false;
     }
 
     @Override
@@ -51,11 +69,8 @@ public class VisiblePlayerMessagesImpl implements VisiblePlayerMessage.Editable,
     @Override
     public void setLocation(Location location) {
         this.location = location;
-        for (int i = 0; i < messages.length; i++) {
-            VisiblePlayerMessage.Editable message = messages[i];
-            Location loc = location.clone();
-            loc.setY(location.getY() + (messages.length - i) * sizeBetweenLines);
-            message.setLocation(loc);
+        for (Editable message : messages) {
+            message.setLocation(location);
         }
     }
 

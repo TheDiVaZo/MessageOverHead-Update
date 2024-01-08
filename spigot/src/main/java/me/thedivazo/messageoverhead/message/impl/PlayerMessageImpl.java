@@ -12,8 +12,8 @@ import java.util.Collection;
 public class PlayerMessageImpl extends VisiblePlayerMessagesImpl implements PlayerMessage {
     protected Player owner;
 
-    public PlayerMessageImpl(VisiblePlayerMessage.Editable[] messages, Collection<Player> showers, Location location, double sizeBetweenLines, Player owner) {
-        super(messages, showers, location, sizeBetweenLines);
+    public PlayerMessageImpl(VisiblePlayerMessage.Editable[] messages, Collection<Player> showers, Location location, Player owner) {
+        super(messages, showers, location);
         this.owner = owner;
     }
 

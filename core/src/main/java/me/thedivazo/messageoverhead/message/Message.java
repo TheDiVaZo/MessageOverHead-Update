@@ -18,24 +18,19 @@ public interface Message {
     }
 
     /**
-     * Представляет всплывающие сообщение с явным указанием зрителей (тех, кто может видеть всплывающее сообщение)
+     * Представляет всплывающие сообщение с явным указанием зрителей (тех, кто может видеть всплывающее сообщение) и логикой отображения
      * @param <E> Класс зрителя
      */
     interface Showable<E> extends Message {
         Collection<E> getShowers();
 
-        interface Editable<E> extends Showable<E> {
-            void setShowers(Collection<E> showers);
-        }
-    }
-
-    /**
-     * Представляет собой всплывающее сообщение со своей логикой отображения
-     */
-    interface Displayable extends Message {
         void show();
         void hide();
         boolean isShow();
+
+        interface Editable<E> extends Showable<E> {
+            void setShowers(Collection<E> showers);
+        }
     }
 
     /**

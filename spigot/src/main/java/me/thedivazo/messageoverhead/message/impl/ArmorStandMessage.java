@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * Реализует отображение сообщений через {@link org.bukkit.entity.EntityType#ARMOR_STAND}
  */
-public class ArmorStandMessage implements VisiblePlayerMessage.Editable, Message.Displayable, LocatableMessage.Editable {
+public class ArmorStandMessage implements VisiblePlayerMessage.Editable {
 
     private final boolean isSmall = true;
     private final boolean noBasePlate = true;
