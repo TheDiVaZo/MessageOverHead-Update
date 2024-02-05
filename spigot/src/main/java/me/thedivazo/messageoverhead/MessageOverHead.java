@@ -1,9 +1,12 @@
 package me.thedivazo.messageoverhead;
 
 import lombok.Getter;
-import me.thedivazo.messageoverhead.message.Message;
-import me.thedivazo.messageoverhead.message.MessageFactory;
-import me.thedivazo.messageoverhead.message.MessageVisibility;
+import me.thedivazo.messageoverhead.core.dao.Dao;
+import me.thedivazo.messageoverhead.core.dao.MessageOfPlayerDao;
+import me.thedivazo.messageoverhead.core.dao.impl.MessageOverHeadDaoImpl;
+import me.thedivazo.messageoverhead.core.display.LocatableDisplay;
+import me.thedivazo.messageoverhead.core.message.LocatableMessage;
+import me.thedivazo.messageoverhead.core.message.Message;
 import me.thedivazo.messageoverhead.util.VersionWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,12 +29,6 @@ public class MessageOverHead extends JavaPlugin {
     public static final String NAME = "MessageOverHead";
 
     @Getter
-    private static MessageFactory.Ownable<Player, PlayerMessage, Message> messageFactory;
+    private Dao<? extends LocatableDisplay<? extends LocatableMessage<?, Player, Player>>, Player> mohDao = new MessageOverHeadDaoImpl<>();
 
-    private static MessageVisibility<PlayerMessage, Player> messageVisibility;
-
-    public static void spawnMessage(Player owner, String text) {
-        PlayerMessage message = messageFactory.createMessage(owner, text);
-        messageVisibility.show(message, owner);
-    }
 }
