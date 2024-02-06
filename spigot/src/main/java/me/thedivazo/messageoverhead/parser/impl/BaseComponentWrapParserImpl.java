@@ -1,6 +1,8 @@
-package me.thedivazo.messageoverhead.parser;
+package me.thedivazo.messageoverhead.parser.impl;
 
 import lombok.AllArgsConstructor;
+import me.thedivazo.messageoverhead.parser.BaseComponentParser;
+import me.thedivazo.messageoverhead.parser.BaseComponentWrapParser;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 
@@ -25,7 +27,7 @@ public class BaseComponentWrapParserImpl implements BaseComponentWrapParser {
         List<BaseComponent[]> result = new ArrayList<>();
         List<BaseComponent> baseComponentLine = new ArrayList<>();
 
-        int currentLength = 0;
+        int currentLineLength = 0;
 
         for (BaseComponent baseComponent : baseComponentText) {
             if (!(baseComponent instanceof TextComponent textComponent)) {
@@ -34,8 +36,8 @@ public class BaseComponentWrapParserImpl implements BaseComponentWrapParser {
             }
 
             String text = textComponent.getText();
-            if (currentLength + text.length() <= maxSizeLine) {
-                currentLength += text.length();
+            if (currentLineLength + text.length() <= maxSizeLine) {
+                currentLineLength += text.length();
                 baseComponentLine.add(baseComponent);
                 continue;
             }
@@ -44,16 +46,18 @@ public class BaseComponentWrapParserImpl implements BaseComponentWrapParser {
             int prevWordLength = 0;
             for (String word : words) {
                 prevWordLength += Math.max(1,word.length());
-                if (currentLength + prevWordLength > maxSizeLine && !word.isEmpty()) {
-                    String endPrevLineWord = word.substring(0, maxSizeLine - currentLength);
-                    String startNextLineWord = word.substring(maxSizeLine - currentLength);
+                if (currentLineLength + prevWordLength > maxSizeLine && !word.isEmpty()) {
+                    String endPrevLineWord = word.substring(0, maxSizeLine - currentLineLength);
+                    String startNextLineWord = word.substring(maxSizeLine - currentLineLength);
 
-                    TextComponent textComponentEndPrevLineWord = new TextComponent(endPrevLineWord);
-                    textComponent.copyFormatting(textComponentEndPrevLineWord);
+                    if(!endPrevLineWord.isEmpty()) {
+                        TextComponent textComponentEndPrevLineWord = new TextComponent(endPrevLineWord);
+                        textComponent.copyFormatting(textComponentEndPrevLineWord);
 
-                    baseComponentLine.add(textComponentEndPrevLineWord);
+                        baseComponentLine.add(textComponentEndPrevLineWord);
+                    }
 
-                    int countLines = startNextLineWord.length() / maxSizeLine;
+                    int countLines = (int) Math.ceil((double) startNextLineWord.length() / maxSizeLine);
                     for (int i = 0; i < countLines; i++) {
                         result.add(baseComponentLine.toArray(BaseComponent[]::new));
                         baseComponentLine = new ArrayList<>(1);
@@ -64,10 +68,9 @@ public class BaseComponentWrapParserImpl implements BaseComponentWrapParser {
                         TextComponent textComponentLine = new TextComponent(
                                 startNextLineWord.substring(startIndex, endIndex));
                         baseComponentLine.add(textComponentLine);
-                        currentLength = endIndex;
+                        currentLineLength = endIndex;
                         prevWordLength = 0;
                     }
-
                 }
                 else if (!word.isEmpty()){
                     TextComponent textComponentWord = new TextComponent(word);

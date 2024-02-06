@@ -1,9 +1,10 @@
-package me.thedivazo.messageoverhead.parser;
+package me.thedivazo.messageoverhead.parser.impl;
 
 import de.themoep.minedown.MineDown;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import me.thedivazo.messageoverhead.parser.BaseComponentParser;
 import net.md_5.bungee.api.chat.BaseComponent;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

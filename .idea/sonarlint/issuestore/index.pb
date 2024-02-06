@@ -72,3 +72,7 @@ w
 G.idea/sonarlint/issuestore/0/7/075e518ee00fa9ada62385e4d9544a7bad3e1db0,1\8\1879d3bb091b7638cd2d6f8556faed0b2c284302
 w
 G.idea/sonarlint/issuestore/7/3/73573b3d587abf659899da760129a716de5bff1d,2\2\2245e4a921599b39c30d7165f94be8d8b147b3d4
+Å
+Qspigot/src/main/java/me/thedivazo/messageoverhead/parser/impl/MineDownParser.java,1\7\17c8c031c30b2a4e2286b9bacee886c919e0b41d
+é
+^spigot/src/main/java/me/thedivazo/messageoverhead/parser/impl/BaseComponentWrapParserImpl.java,3\1\31d352ef6c6880e4225f77d204733f1444bff7ae
