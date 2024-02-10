@@ -2,5 +2,5 @@ package me.thedivazo.messageoverhead.parser;
 
 import java.util.function.Function;
 
-public interface Parser<T> extends Function<String, T> {
+public interface Wrapper<T> extends Function<T, T[]> {
 }

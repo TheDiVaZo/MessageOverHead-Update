@@ -27,6 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MessageOverHead extends JavaPlugin {
     public static final VersionWrapper MINECRAFT_VERSION = VersionWrapper.valueOf(Bukkit.getVersion());
     public static final String NAME = "MessageOverHead";
+    
 
     @Getter
     private Dao<? extends LocatableDisplay<? extends LocatableMessage<?, Player, Player>>, Player> mohDao = new MessageOverHeadDaoImpl<>();
